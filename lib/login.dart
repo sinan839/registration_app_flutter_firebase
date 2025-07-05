@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:login/forgotpass.dart';
+import 'package:login/services.dart';
 import 'package:login/sign%20up.dart';
 
-class login extends StatelessWidget {
+class login extends StatefulWidget {
   const login({super.key});
+
+  @override
+  State<login> createState() => _loginState();
+}
+
+class _loginState extends State<login> {
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +33,8 @@ class login extends StatelessWidget {
             SizedBox(
               height: 50,
               width: 400,
-              child: TextField(
+              child: TextFormField(
+                controller: emailcontroller,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -39,7 +50,8 @@ class login extends StatelessWidget {
             SizedBox(
               height: 50,
               width: 400,
-              child: TextField(
+              child: TextFormField(
+                controller: passwordcontroller,
                 obscureText: true,
                 decoration: InputDecoration(
                   filled: true,
@@ -57,7 +69,13 @@ class login extends StatelessWidget {
               height: 50,
               width: 400,
               child: ElevatedButton(
-                onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => login(),));},
+                onPressed: () {
+                  loginn(
+                    email: emailcontroller.text,
+                    password: passwordcontroller.text,
+                    context: context,
+                  );
+                },
                 child: Text("Login"),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
@@ -80,9 +98,46 @@ class login extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => signup(),));},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => signup()),
+                      );
+                    },
                     child: Text(
                       "Sign up",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Forgot Password?",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => frgt()
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "Reset Password",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,

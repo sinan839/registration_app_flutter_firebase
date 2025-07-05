@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:login/login.dart';
+import 'package:login/services.dart';
 
-class signup extends StatelessWidget {
+class signup extends StatefulWidget {
   const signup({super.key});
+
+  @override
+  State<signup> createState() => _signupState();
+}
+
+class _signupState extends State<signup> {
+  TextEditingController namecontroller = TextEditingController();
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
+  TextEditingController confirmcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +35,7 @@ class signup extends StatelessWidget {
           SizedBox(
             height: 50,
             width: 350,
-            child: TextField(
+            child: TextFormField(controller: namecontroller,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
@@ -40,7 +51,7 @@ class signup extends StatelessWidget {
           SizedBox(
             height: 50,
             width: 350,
-            child: TextField(
+            child: TextFormField(controller: emailcontroller,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
@@ -56,7 +67,7 @@ class signup extends StatelessWidget {
           SizedBox(
             height: 50,
             width: 350,
-            child: TextField(
+            child: TextFormField(controller: passwordcontroller,
               obscureText: true,
               decoration: InputDecoration(
                 filled: true,
@@ -73,7 +84,7 @@ class signup extends StatelessWidget {
           SizedBox(
             height: 50,
             width: 350,
-            child: TextField(
+            child: TextFormField(controller: confirmcontroller,
               obscureText: true,
               decoration: InputDecoration(
                 filled: true,
@@ -91,7 +102,12 @@ class signup extends StatelessWidget {
             height: 50,
             width: 350,
             child: ElevatedButton(
-              onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => signup(),));},
+              onPressed: () {
+                signupp(username: namecontroller.text,
+                    email: emailcontroller.text,
+                    password: passwordcontroller.text,
+                    confirm: confirmcontroller.text,context: context);
+              },
               child: Text("Sign Up"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
@@ -111,7 +127,10 @@ class signup extends StatelessWidget {
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
                 ),
                 TextButton(
-                  onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => login(),));},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => login(),));
+                  },
                   child: Text(
                     "Login",
                     style: TextStyle(
